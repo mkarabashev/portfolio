@@ -1,0 +1,32 @@
+.space {
+  height: 1050px;
+}
+
+.navigation {
+  position: fixed;
+  right: 0;
+  padding: 50px 50px 20px 0;
+  z-index: 2;
+}
+
+@media only screen and (max-width: 480px) {
+  .navigation {
+    left: 0;
+    padding: 10px 50px 10px 0;
+  }
+}
+
+.right-side {
+  position: absolute;
+  right: 0;
+}
+
+.group:before,
+.group:after {
+  content: "";
+  display: table
+}
+
+.group:after {
+  clear: both;
+}
