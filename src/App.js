@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link, Element } from 'react-scroll';
+import classnames from 'classnames';
 import Navbar from './components/Navbar';
 import ContentBox from './components/ContentBox';
 import AnimatedBg from './components/AnimatedBg/AnimatedBg';
@@ -13,7 +14,7 @@ class App extends Component {
         <ContentBox>
           <Navbar className="navigation">
             <ul>
-              <li><Link activeClass="active" to="home" spy>Home</Link></li>
+              <li><Link className={classnames(this.isActive === 1 && 'active')} onSetActive={console.log('samth')} to="home">Home</Link></li>
               <li><Link activeClass="active" to="projects" spy>Projects</Link></li>
               <li><Link activeClass="active" to="skills" spy>Skills</Link></li>
               <li><Link activeClass="active" to="contacts" spy>Contacts</Link></li>
@@ -22,17 +23,13 @@ class App extends Component {
         </ContentBox>
         <Element name="home" className="space" />
         <hr />
-        <Transition eventKey={0} height={'300px'} color="#03A9F4" />
+        <Transition eventKey={0} height={'400px'} from="#03A9F4" to="#fff" position="1" />
         <hr />
         <Element name="projects" className="space" />
         <hr />
-        <Transition eventKey={1} height={'300px'} color="#03A9F4" reversed />
+        <Transition eventKey={1} height={'400px'} from="#fff" to="#03A9F4" />
         <hr />
         <Element name="skills" className="space" />
-        <hr />
-        <Transition eventKey={2} height={'300px'} color="#03A9F4" />
-        <hr />
-        <Element name="contacts" className="space" />
       </AnimatedBg>
     );
   }

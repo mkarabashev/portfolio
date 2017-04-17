@@ -5,13 +5,13 @@
   "dependencies": {
     "classnames": "^2.2.5",
     "gsap": "^1.19.1",
-    "hex-to-hsl": "^1.0.2",
-    "hsl-to-hex": "^1.0.0",
+    "hex-rgb": "^1.0.0",
     "material-ui": "^0.17.1",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-scroll": "^1.4.7",
     "react-tap-event-plugin": "^2.0.1",
+    "rgb-hex": "^2.1.0",
     "scrollmagic": "^2.0.5"
   },
   "devDependencies": {

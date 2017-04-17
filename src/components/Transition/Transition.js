@@ -1,28 +1,13 @@
 import React, { Component } from 'react';
-import hexToHsl from 'hex-to-hsl';
-import hslToHex from 'hsl-to-hex';
+import hexToRgb from 'hex-rgb';
+import rgbToHex from 'rgb-hex';
 
 class Transition extends Component {
   constructor(props) {
     super(props);
     this.handleBg = this.handleBg.bind(this);
     this.determineBg = this.determineBg.bind(this);
-
-    // color
-    const color= this.props.color;
-    const hslColor = hexToHsl(color);
-    this.hue = hslColor[0];
-    this.saturation = hslColor[1];
-    this.luminocity = hslColor[2];
-
-    // end values
-    if (this.props.reversed) {
-      this.initialColor = '#ffffff';
-      this.endColor = color;
-    } else {
-      this.initialColor = color;
-      this.endColor = '#ffffff';
-    }
+    this.calcVector = this.calcVector.bind(this);
   }
 
   componentDidMount() {
@@ -38,17 +23,16 @@ class Transition extends Component {
 
   handleBg() {
     // window height and offset position of the elements
-    const vh = window.innerHeight / 2;
+    const vh = window.innerHeight * (this.props.position || 0.5);
     const beginPos = this.begin.getBoundingClientRect().bottom;
     const endPos = this.end.getBoundingClientRect().bottom;
 
     // props and fns
-    const { eventKey, handleTransition } = this.props;
-    const { calcProgress, determineBg, initialColor, endColor } = this;
+    const { calcProgress, determineBg, props: { from, to, eventKey, handleTransition } } = this;
 
     // send back the bg color
-    if (vh < beginPos) handleTransition(eventKey, initialColor, 'pre');
-    else if (vh > endPos) handleTransition(eventKey, endColor, 'post');
+    if (vh < beginPos) handleTransition(eventKey, from, 'pre');
+    else if (vh > endPos) handleTransition(eventKey, to, 'post');
     else handleTransition(
       eventKey,
       determineBg(calcProgress(beginPos, endPos, vh)),
@@ -60,15 +44,24 @@ class Transition extends Component {
     return (current - begin) / (end - begin);
   }
 
+  calcRange(start, finish) {
+    return finish - start;
+  }
+
+  calcVector(start, finish, progress) {
+    return start + this.calcRange(start, finish) * progress;
+  }
+
   determineBg(progress) {
-    const { hue, saturation, luminocity } = this;
-    const isReversed = this.props.reversed;
+    const { calcVector, props: { from, to } } = this;
+    const [ sHue, sSaturation, sLuminocity ] = hexToRgb(from, to);
+    const [ fHue, fSaturation, fLuminocity ] = hexToRgb(to, from);
 
-    const nextLuminosity = isReversed
-      ? 100 - (100 - luminocity) * progress
-      : luminocity + progress * (100 - luminocity);
-
-    return hslToHex(hue, saturation, nextLuminosity);
+    return '#' + rgbToHex(
+      calcVector(sHue, fHue, progress),
+      calcVector(sSaturation, fSaturation, progress),
+      calcVector(sLuminocity, fLuminocity, progress),
+    );
   }
 
   render() {
