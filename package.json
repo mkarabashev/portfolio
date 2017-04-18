@@ -6,6 +6,8 @@
     "classnames": "^2.2.5",
     "gsap": "^1.19.1",
     "hex-rgb": "^1.0.0",
+    "hex-to-hsl": "^1.0.2",
+    "hsl-to-hex": "^1.0.0",
     "material-ui": "^0.17.1",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
@@ -15,7 +17,10 @@
     "scrollmagic": "^2.0.5"
   },
   "devDependencies": {
-    "react-scripts": "0.9.5"
+    "enzyme": "^2.8.2",
+    "react-scripts": "0.9.5",
+    "react-test-renderer": "^15.5.4",
+    "sinon": "^2.1.0"
   },
   "scripts": {
     "start": "react-scripts start",

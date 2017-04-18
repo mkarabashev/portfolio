@@ -7,7 +7,8 @@ class Transition extends Component {
     super(props);
     this.handleBg = this.handleBg.bind(this);
     this.determineBg = this.determineBg.bind(this);
-    this.calcVector = this.calcVector.bind(this);
+    this.calcPosition = this.calcPosition.bind(this);
+    this.calcColorVector = this.calcColorVector.bind(this);
   }
 
   componentDidMount() {
@@ -22,13 +23,16 @@ class Transition extends Component {
   }
 
   handleBg() {
-    // window height and offset position of the elements
-    const vh = window.innerHeight * (this.props.position || 0.5);
-    const beginPos = this.begin.getBoundingClientRect().bottom;
-    const endPos = this.end.getBoundingClientRect().bottom;
-
     // props and fns
-    const { calcProgress, determineBg, props: { from, to, eventKey, handleTransition } } = this;
+    const {
+      calcPosition,
+      calcProgress,
+      determineBg,
+      props: { from, to, eventKey, handleTransition }
+    } = this;
+
+    // position of the elements
+    const { vh, beginPos, endPos } = calcPosition();
 
     // send back the bg color
     if (vh < beginPos) handleTransition(eventKey, from, 'pre');
@@ -40,6 +44,25 @@ class Transition extends Component {
     )
   }
 
+
+  // fns for calculating element position
+
+  // window height and offset position of the elements
+  calcPosition() {
+    const { begin, end, props: { position } } = this;
+
+    const shouldConfigureVhPos = typeof position === 'number'
+      && position >= 0
+      && position <= 1;
+
+    const vh = window.innerHeight * (shouldConfigureVhPos ? position : 0.5);
+    const beginPos = begin.getBoundingClientRect().bottom;
+    const endPos = end.getBoundingClientRect().bottom;
+
+    return { vh, beginPos, endPos };
+  }
+
+  // progress of the transition
   calcProgress(begin, end, current) {
     return (current - begin) / (end - begin);
   }
@@ -48,19 +71,24 @@ class Transition extends Component {
     return finish - start;
   }
 
-  calcVector(start, finish, progress) {
+  /**
+  * fns for calculating the bg color
+  * progress is determined by element pos
+  **/
+
+  calcColorVector(start, finish, progress) {
     return start + this.calcRange(start, finish) * progress;
   }
 
   determineBg(progress) {
-    const { calcVector, props: { from, to } } = this;
-    const [ sHue, sSaturation, sLuminocity ] = hexToRgb(from, to);
-    const [ fHue, fSaturation, fLuminocity ] = hexToRgb(to, from);
+    const { calcColorVector, props: { from, to } } = this;
+    const [ sR, sG, sB ] = hexToRgb(from, to);
+    const [ fR, fG, fB ] = hexToRgb(to, from);
 
     return '#' + rgbToHex(
-      calcVector(sHue, fHue, progress),
-      calcVector(sSaturation, fSaturation, progress),
-      calcVector(sLuminocity, fLuminocity, progress),
+      calcColorVector(sR, fR, progress),
+      calcColorVector(sG, fG, progress),
+      calcColorVector(sB, fB, progress),
     );
   }
 
