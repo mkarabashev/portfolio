@@ -25,7 +25,7 @@ const data = {
     from: '#03a9f4',
     to: '#ffffff',
     eventKey: 1,
-    height: 100,
+    height: '100px',
     handleTransition: sinon.spy()
   },
   begin: {
@@ -70,6 +70,13 @@ test('<Transition> determineBg should return a new hex color', () => {
   expect(determineBg(0)).toEqual(TransitionInstance.props.from);
   expect(determineBg(1)).toEqual(TransitionInstance.props.to);
   expect(determineBg(0.5)).toEqual('#81d4f9');
+});
+
+test('<Transition> calcPosition should return an object with the relevant data', () => {
+  const calcPosition = TransitionInstance.calcPosition;
+  posStubsVals(20);
+  const result = Object.keys(calcPosition());
+  expect(result).toEqual([ 'vh', 'beginPos', 'endPos' ]);
 });
 
 test('<Transition> handleBg should return an eventKey, color, and status', () => {
@@ -148,5 +155,20 @@ test('<Transition> should setup the height of the transition', () => {
   expect(children.length).toEqual(2);
   expect(children.nodes[0].type).toBe('div');
   expect(children.nodes[1].type).toBe('div');
-  expect(children.nodes[1].props).toMatchObject({ style: { height: 100 } });
+  expect(children.nodes[1].props).toMatchObject({ style: { height: '100px' } });
 })
+
+test('<Transition> should be able to incorporate through children', () => {
+  const wrapper = shallow(
+    <Transition {...data.props}>
+      testChild
+    </Transition>
+  );
+
+  expect(wrapper.find('div').nodes[2].props).toMatchObject({
+    children: 'testChild',
+    style: {
+      height: '100px'
+    }
+  });
+});

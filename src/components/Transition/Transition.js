@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import hexToRgb from 'hex-rgb';
 import rgbToHex from 'rgb-hex';
 
@@ -44,10 +45,7 @@ class Transition extends Component {
     )
   }
 
-
   // fns for calculating element position
-
-  // window height and offset position of the elements
   calcPosition() {
     const { begin, end, props: { position } } = this;
 
@@ -59,10 +57,10 @@ class Transition extends Component {
     const beginPos = begin.getBoundingClientRect().bottom;
     const endPos = end.getBoundingClientRect().bottom;
 
+    // window height and offset position of the elements
     return { vh, beginPos, endPos };
   }
 
-  // progress of the transition
   calcProgress(begin, end, current) {
     return (current - begin) / (end - begin);
   }
@@ -93,15 +91,26 @@ class Transition extends Component {
   }
 
   render() {
-    const { height } = this.props;
+    const { height, children } = this.props;
 
     return (
       <div>
         <div ref={node => this.begin = node} />
-        <div ref={node => this.end = node} style={{ height }} />
+        <div ref={node => this.end = node} style={{ height }}>
+          { children }
+        </div>
       </div>
     );
   }
 }
+
+Transition.propTypes = {
+  eventKey: PropTypes.number,
+  handleTransition: PropTypes.func,
+  height: PropTypes.string.isRequired,
+  from: PropTypes.string.isRequired,
+  to: PropTypes.string.isRequired,
+  position: PropTypes.number
+};
 
 export default Transition;

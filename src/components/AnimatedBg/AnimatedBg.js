@@ -1,26 +1,37 @@
 import React, { Component } from 'react';
 import Transition from '../Transition/Transition';
-import ContentBox from '../ContentBox';
 
 class AnimatedBg extends Component {
   constructor(props) {
     super(props);
     this.handleTransition = this.handleTransition.bind(this);
+    this.findTransitionsNum = this.findTransitionsNum.bind(this);
+
     this.colors = [];
     this.keyNum = 0;
-
     this.state = {
-      backgroundColor: this.props.defaultColor
+      backgroundColor: 'transparent'
     };
   }
 
   componentWillMount() {
-    this.findTransitionsNum();
+    this.findTransitionsNum(this.props.children);
+    this.childrenWithTransition(this.props.children);
+  }
+
+  componentWillUpdate(nextProps) {
+    const oldKeyNum = this.keyNum;
+    this.findTransitionsNum(nextProps.children);
+
+    if (oldKeyNum !== this.keyNum) {
+      this.childrenWithTransition(nextProps.children)
+    }
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    if (this.state.backgroundColor === nextState.backgroundColor) return false;
-    return true;
+    if (this.state.backgroundColor !== nextState.backgroundColor) return true;
+    if (this.props.children.length !== nextProps.children.length) return true;
+    return false;
   }
 
   handleTransition(eventKey, color, activity) {
@@ -39,21 +50,21 @@ class AnimatedBg extends Component {
     }
   }
 
-  findTransitionsNum() {
-    React.Children.forEach(this.props.children, child => {
+  findTransitionsNum(children) {
+    this.keyNum = 0;
+    React.Children.forEach(children, child => {
       if (child.type === Transition) this.keyNum += 1;
     });
   }
 
-  childrenWithTransition() {
-    const { handleTransition, state: { backgroundColor } } = this;
-    return React.Children.map(this.props.children, child => {
-      if (child.type === Transition) {
-        return React.cloneElement(child, { handleTransition })
-      }
+  childrenWithTransition(children) {
+    const { handleTransition } = this;
+    let eventKey = -1;
 
-      if (child.type === ContentBox) {
-        return React.cloneElement(child, { backgroundColor })
+    this.children = React.Children.map(children, child => {
+      if (child.type === Transition) {
+        eventKey += 1;
+        return React.cloneElement(child, { eventKey, handleTransition })
       }
 
       return child;
@@ -65,7 +76,7 @@ class AnimatedBg extends Component {
 
     return (
       <div style={{ backgroundColor }}>
-        { this.childrenWithTransition() }
+        { this.children }
       </div>
     );
   }

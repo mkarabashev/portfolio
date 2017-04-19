@@ -9,6 +9,7 @@
     "hex-to-hsl": "^1.0.2",
     "hsl-to-hex": "^1.0.0",
     "material-ui": "^0.17.1",
+    "prop-types": "^15.5.8",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-scroll": "^1.4.7",
