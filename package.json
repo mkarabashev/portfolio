@@ -2,6 +2,7 @@
   "name": "portfolio",
   "version": "0.1.0",
   "private": true,
+  "homepage": "http://mkarabashev.github.io/react-scroll-background",
   "dependencies": {
     "classnames": "^2.2.5",
     "gsap": "^1.19.1",
@@ -12,21 +13,27 @@
     "prop-types": "^15.5.8",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
+    "react-redux": "^5.0.4",
     "react-scroll": "^1.4.7",
     "react-tap-event-plugin": "^2.0.1",
+    "redux": "^3.6.0",
     "rgb-hex": "^2.1.0",
+    "scroll-background": "^1.0.3",
     "scrollmagic": "^2.0.5"
   },
   "devDependencies": {
     "enzyme": "^2.8.2",
     "react-scripts": "0.9.5",
     "react-test-renderer": "^15.5.4",
+    "redux-devtools-extension": "^2.13.0",
     "sinon": "^2.1.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   }
 }
