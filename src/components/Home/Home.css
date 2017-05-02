@@ -1,0 +1,29 @@
+.pagetop {
+  color: white;
+  overflow: auto;
+  position: relative;
+  height: 100vh;
+}
+
+#home {
+  position: absolute;
+  padding-left: 100px;
+  bottom: 10%;
+  margin: auto;
+  font-size: 2.2em;
+}
+
+@media only screen and (max-width: 1000px) {
+  #home {
+    padding-left: 30px;
+    font-size: 1.5em;
+    width: 50%;
+  }
+}
+
+@media only screen and (max-width:600px) {
+  #home {
+    width: 100%;
+    padding: 0 20px 0 20px;
+  }
+}

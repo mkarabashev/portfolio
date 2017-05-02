@@ -4890,9 +4890,9 @@ sax@^1.2.1, sax@~1.2.1:
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/sax/-/sax-1.2.2.tgz#fd8631a23bc7826bef5d871bdb87378c95647828"
 
-scroll-background@^1.0.3:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/scroll-background/-/scroll-background-1.0.3.tgz#cf78b132acc75c6e2003467da120e8066a30e98f"
+scroll-background@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/scroll-background/-/scroll-background-1.0.5.tgz#fcaf014d8f531e5e4239e5cac08dc5eef83bc999"
 
 scrollmagic@^2.0.5:
   version "2.0.5"

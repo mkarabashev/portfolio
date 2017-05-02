@@ -1,10 +1,27 @@
 import React, { Component } from 'react';
-import { Tabs, Tab } from 'material-ui';
-import { Link, scroller } from 'react-scroll';
-
+import { Tabs } from 'material-ui';
 import hslToHex from 'hsl-to-hex';
 import hexToHsl from 'hex-to-hsl';
+
+import { makeNavTab } from '../../HOC';
 import './Navigation.css';
+
+const tabProps = [
+  {
+    name: 'home'
+  },
+  {
+    name: 'skills'
+  },
+  {
+    name: 'projects',
+    isFromBottomTwo: true
+  },
+  {
+    name: 'contacts',
+    isFromBottomTwo: true
+  }
+];
 
 class Navigation extends Component {
   constructor(props) {
@@ -25,7 +42,10 @@ class Navigation extends Component {
   render() {
     const { backgroundColor } = this.props;
     const [ hue, saturation, luminosity ] = hexToHsl(backgroundColor);
-    const color = luminosity > 70 ? hslToHex(hue, saturation, 5) : 'white' ;
+    const color = luminosity > 70 ? hslToHex(hue, saturation, 5) : 'white';
+
+    const tabsWithCb = tabProps.map(tab => ({ ...tab, cb: this.handleSetActive }));
+    const navTabs = tabsWithCb.map(tab => makeNavTab(tab));
 
     return (
       <navigation style={{ backgroundColor, color }} id="navigation">
@@ -33,12 +53,8 @@ class Navigation extends Component {
           value={this.state.active}
           className="tabs"
           inkBarStyle={{ backgroundColor: color }}
-        >
-          <Tab onActive={() => scroller.scrollTo('home')} value="home" label={<Link to="home" spy onSetActive={this.handleSetActive}>Home</Link>} />
-          <Tab onActive={() => scroller.scrollTo('skills')} value="skills" label={<Link to="skills" spy onSetActive={this.handleSetActive}>Skills</Link>} />
-          <Tab onClick={() => this.handleSetActive('projects')} onActive={() => scroller.scrollTo('projects')} value="projects" label={<Link onClick={() => this.handleSetActive('projects')} to="projects" spy onSetActive={this.handleSetActive}>Projects</Link>} />
-          <Tab onClick={() => this.handleSetActive('projects')} onActive={() => scroller.scrollTo('contacts')} value="contacts" label={<Link onClick={() => this.handleSetActive('projects')} to="contacts" spy onSetActive={this.handleSetActive}>Contacts</Link>} />
-        </Tabs>
+          children={navTabs}
+        />
       </navigation>
     );
   }

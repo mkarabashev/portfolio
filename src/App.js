@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { AnimatedBg, Transition } from 'scroll-background';
 import { Element } from 'react-scroll';
+
 import Navigation from './components/Navigation';
+import Home from './components/Home';
 import './App.css';
 
 class App extends Component {
@@ -36,7 +38,7 @@ class App extends Component {
       <div id="content">
         <AnimatedBg ref={node => this.node = node}>
           <Navigation backgroundColor={backgroundColor} />
-          <Element name="home" className="space" />
+          <Home />
           <Transition height={'400px'} from="#03A9F4" to="#FFCA28">test</Transition>
           <Element name="skills" className="space" />
           <Transition height={'400px'} from="#FFCA28" to="#f9fbe7" />

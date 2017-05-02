@@ -18,7 +18,7 @@
     "react-tap-event-plugin": "^2.0.1",
     "redux": "^3.6.0",
     "rgb-hex": "^2.1.0",
-    "scroll-background": "^1.0.3",
+    "scroll-background": "^1.0.5",
     "scrollmagic": "^2.0.5"
   },
   "devDependencies": {
