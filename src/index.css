@@ -15,3 +15,27 @@ body {
 *:after {
   box-sizing: inherit;
 }
+
+.table {
+  display:table;
+  width: 100%;
+}
+
+.table-cell {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.table-cell--right {
+  text-align: right;
+}
+
+.cell-child {
+  display: inline-block;
+}
+
+.clearfix:after {
+    content:" ";
+    display:block;
+    clear:both;
+}

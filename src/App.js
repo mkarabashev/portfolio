@@ -39,9 +39,9 @@ class App extends Component {
         <AnimatedBg ref={node => this.node = node}>
           <Navigation backgroundColor={backgroundColor} />
           <Home />
-          <Transition height={'400px'} from="#03A9F4" to="#FFCA28">test</Transition>
+          <Transition height={'400px'} from="#03A9F4" to="#FF9800">test</Transition>
           <Element name="skills" className="space" />
-          <Transition height={'400px'} from="#FFCA28" to="#f9fbe7" />
+          <Transition height={'400px'} from="#FF9800" to="#f9fbe7" />
           <Element name="projects" className="space" />
         </AnimatedBg>
         <Element name="contacts" style={{ height: "400px", backgroundColor: "#333" }} />
