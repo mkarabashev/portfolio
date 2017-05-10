@@ -10,7 +10,7 @@ const makeNavTab = ({ isFromBottomTwo, name, cb }) => {
     <Link
       children={[ title ]}
       onSetActive={cb}
-      onClick={() => isFromBottomTwo && cb('projects')}
+      onClick={() => isFromBottomTwo && cb('skills')}
       to={name}
       spy
     />
@@ -18,7 +18,7 @@ const makeNavTab = ({ isFromBottomTwo, name, cb }) => {
 
   return (
     <Tab
-      onClick={() => cb('projects')}
+      onClick={() => isFromBottomTwo && cb('skills')}
       onActive={() => scroller.scrollTo(name)}
       value={name}
       label={scrollLink}

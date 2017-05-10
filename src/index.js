@@ -1,12 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
 import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
-import store from './store';
 import App from './App';
 import './index.css';
 
@@ -24,10 +22,8 @@ const customTheme = {
 }
 
 ReactDOM.render(
-  <Provider store={store}>
-    <MuiThemeProvider muiTheme={customTheme}>
-      <App />
-    </MuiThemeProvider>
-  </Provider>,
+  <MuiThemeProvider muiTheme={customTheme}>
+    <App />
+  </MuiThemeProvider>,
   document.getElementById('root')
 );

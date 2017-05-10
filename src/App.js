@@ -4,6 +4,7 @@ import { Element } from 'react-scroll';
 
 import Navigation from './components/Navigation';
 import Home from './components/Home';
+import Projects from './components/Projects';
 import './App.css';
 
 class App extends Component {
@@ -39,10 +40,12 @@ class App extends Component {
         <AnimatedBg ref={node => this.node = node}>
           <Navigation backgroundColor={backgroundColor} />
           <Home />
-          <Transition height={'400px'} from="#03A9F4" to="#FF9800">test</Transition>
+          <Transition style={{marginTop: '-50px'}} height='225px' from="#03A9F4" to="#7E57C2" position={0.8}>
+            <Element name="Projects" id="projects" style={{padding: 50}} />
+          </Transition>
+          <Projects />
+          <Transition height={'300px'} from="#7E57C2" to="#f9fbe7" />
           <Element name="skills" className="space" />
-          <Transition height={'400px'} from="#FF9800" to="#f9fbe7" />
-          <Element name="projects" className="space" />
         </AnimatedBg>
         <Element name="contacts" style={{ height: "400px", backgroundColor: "#333" }} />
       </div>

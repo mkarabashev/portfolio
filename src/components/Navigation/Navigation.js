@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Tabs } from 'material-ui';
-import hslToHex from 'hsl-to-hex';
 import hexToHsl from 'hex-to-hsl';
 
 import { makeNavTab } from '../../HOC';
@@ -11,10 +10,10 @@ const tabProps = [
     name: 'home'
   },
   {
-    name: 'skills'
+    name: 'projects'
   },
   {
-    name: 'projects',
+    name: 'skills',
     isFromBottomTwo: true
   },
   {
@@ -41,8 +40,8 @@ class Navigation extends Component {
 
   render() {
     const { backgroundColor } = this.props;
-    const [ hue, saturation, luminosity ] = hexToHsl(backgroundColor);
-    const color = luminosity > 70 ? hslToHex(hue, saturation, 5) : 'white';
+    const [ , , luminosity ] = hexToHsl(backgroundColor);
+    const color = luminosity > 70 ? 'black' : 'white';
 
     const tabsWithCb = tabProps.map(tab => ({ ...tab, cb: this.handleSetActive }));
     const navTabs = tabsWithCb.map(tab => makeNavTab(tab));

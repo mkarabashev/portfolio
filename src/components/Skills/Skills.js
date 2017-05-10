@@ -1,9 +1,9 @@
 import React from 'react';
 import { Element } from 'react-scroll';
 
-import './Home.css';
+import './Skills.css';
 
-const Home = () => (
+const Skills = () => (
   <Element name="skills" className="pagetop">
     <section id="skills">
       <h1>Hi,</h1>
@@ -13,4 +13,4 @@ const Home = () => (
   </Element>
 );
 
-export default SkillsPage;
+export default Skills;

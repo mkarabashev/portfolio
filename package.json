@@ -2,24 +2,17 @@
   "name": "portfolio",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://mkarabashev.github.io/react-scroll-background",
+  "homepage": "http://mkarabashev.github.io/",
   "dependencies": {
     "classnames": "^2.2.5",
-    "gsap": "^1.19.1",
-    "hex-rgb": "^1.0.0",
     "hex-to-hsl": "^1.0.2",
-    "hsl-to-hex": "^1.0.0",
     "material-ui": "^0.17.1",
     "prop-types": "^15.5.8",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
-    "react-redux": "^5.0.4",
     "react-scroll": "^1.4.7",
     "react-tap-event-plugin": "^2.0.1",
-    "redux": "^3.6.0",
-    "rgb-hex": "^2.1.0",
-    "scroll-background": "^1.0.5",
-    "scrollmagic": "^2.0.5"
+    "scroll-background": "^1.0.5"
   },
   "devDependencies": {
     "enzyme": "^2.8.2",
